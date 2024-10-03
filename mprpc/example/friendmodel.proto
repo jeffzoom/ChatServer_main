@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package friendservice;
+
+option cc_generic_services = true;
+
+
+service FriendService {
+    rpc AddFriend(AddFriendRequest) returns (AddFriendResponse);
+    rpc GetFriendsList(GetFriendsListRequest) returns (GetFriendsListResponse);
+}
+
+message AddFriendRequest {
+    int32 userid = 1;
+    int32 friendid = 2;
+}
+
+message AddFriendResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+message GetFriendsListRequest {
+    int32 userid = 1;
+}
+
+message GetFriendsListResponse {
+    repeated User friends = 1;
+}
+
+message User {
+    int32 id = 1;
+    string name = 2;
+    string state = 3;
+}

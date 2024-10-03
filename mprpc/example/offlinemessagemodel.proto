@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package offlinemsgservice;
+
+option cc_generic_services = true;
+
+service OfflineMessageService {
+    rpc Insert(InsertRequest) returns (InsertResponse);
+    rpc Remove(RemoveRequest) returns (RemoveResponse);
+    rpc Query(QueryRequest) returns (QueryResponse);
+}
+
+message InsertRequest {
+    int32 userid = 1;
+    string message = 2;
+}
+
+message InsertResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+message RemoveRequest {
+    int32 userid = 1;
+}
+
+message RemoveResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+message QueryRequest {
+    int32 userid = 1;
+}
+
+message QueryResponse {
+    repeated string messages = 1;
+}

@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package userservice;
+import "google/protobuf/empty.proto";
+
+option cc_generic_services = true;
+
+// 定义 User 数据类型
+message User {
+    int32 id = 1;
+    string name = 2;
+    string password = 3;
+    string state = 4;
+}
+
+// 定义 Insert 请求和响应消息
+message InsertRequest {
+    User user = 1;
+}
+
+message InsertResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+// 定义 Query 请求和响应消息
+message QueryRequest {
+    int32 id = 1;
+}
+
+message QueryResponse {
+    User user = 1;
+    bool found = 2;
+}
+
+// 定义 UpdateState 请求和响应消息
+message UpdateStateRequest {
+    User user = 1;
+}
+
+message UpdateStateResponse {
+    bool success = 1;
+}
+
+// 定义 ResetState 响应消息
+message ResetStateResponse {
+    bool success = 1;
+}
+
+// 定义 UserService RPC 服务
+service UserService {
+    rpc Insert (InsertRequest) returns (InsertResponse);
+    rpc Query (QueryRequest) returns (QueryResponse);
+    rpc UpdateState (UpdateStateRequest) returns (UpdateStateResponse);
+    rpc ResetState (google.protobuf.Empty) returns (ResetStateResponse);
+}

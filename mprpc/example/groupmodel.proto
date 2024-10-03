@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package groupservice;
+
+option cc_generic_services = true;
+
+service GroupService {
+    rpc CreateGroup(CreateGroupRequest) returns (CreateGroupResponse);
+    rpc AddGroup(AddGroupRequest) returns (AddGroupResponse);
+    rpc QueryGroups(QueryGroupsRequest) returns (QueryGroupsResponse);
+    rpc QueryGroupUsers(QueryGroupUsersRequest) returns (QueryGroupUsersResponse);
+}
+
+message CreateGroupRequest {
+    string groupname = 1;
+    string groupdesc = 2;
+}
+
+message CreateGroupResponse {
+    bool success = 1;
+    string message = 2;
+    int32 groupid = 3;
+}
+
+message AddGroupRequest {
+    int32 userid = 1;
+    int32 groupid = 2;
+    string role = 3;
+}
+
+message AddGroupResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+message QueryGroupsRequest {
+    int32 userid = 1;
+}
+
+message QueryGroupsResponse {
+    repeated Group groups = 1;
+}
+
+message QueryGroupUsersRequest {
+    int32 userid = 1;
+    int32 groupid = 2;
+}
+
+message QueryGroupUsersResponse {
+    repeated int32 userids = 1;
+}
+
+message Group {
+    int32 id = 1;
+    string groupname = 2;
+    string groupdesc = 3;
+    repeated GroupUser users = 4;
+}
+
+message GroupUser {
+    int32 id = 1;
+    string name = 2;
+    string state = 3;
+    string role = 4;
+}

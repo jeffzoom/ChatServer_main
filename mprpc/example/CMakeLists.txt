@@ -1,0 +1,7 @@
+add_subdirectory(callee)
+add_subdirectory(caller)
+add_subdirectory(calleefriendmodel)
+add_subdirectory(calleeusermodel)
+add_subdirectory(calleeofflinemessagemodel)
+add_subdirectory(calleegroupmodel)
+add_subdirectory(callerchat)
